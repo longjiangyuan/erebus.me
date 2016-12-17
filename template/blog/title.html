@@ -1,0 +1,21 @@
+<h4>
+  <!--a href="/blog/{{.ID}}">{{.Title}}</a-->
+  <div class="row">
+    <div class="col-xs-9">
+      {{.Title}}
+      <small>
+        <a href="/category/{{.Category|urlquery}}" class="label label-default">{{.Category}}</a>
+        <em>by {{.Author}} on {{.PostAt.Format "Jan _2, 2006 15:04"}}</em>
+      </small>
+    </div>
+    <div class="col-xs-3 text-right">
+      <small>
+      {{if eq .NumComments 0}}
+      <a href="/blog/{{.ID}}#response"><span class="glyphicon glyphicon-comment"></span> 0</a>
+      {{else}}
+      <a href="/blog/{{.ID}}#comment"><span class="glyphicon glyphicon-comment"></span> {{.NumComments}}</a>
+      {{end}}
+      </small>
+    </div>
+  </div>
+</h4>

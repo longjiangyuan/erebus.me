@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+{{template "/common/head.html"}}
+<title>Erebus.me</title>
+</head>
+<body>
+{{template "/common/nav.html" .}}
+<div class="container">
+  <div class="row">
+    <!-- left page -->
+    <div class="col-xs-3">
+      {{template "/common/about.html"}}
+
+      <div class="page-header">
+        <h4>Photos</h4><!--· <a href="/photo/">view all</a></small></h4>-->
+      </div>
+      <!--
+      <div class="row">
+        <div class="col-xs-6"><a class="thumbnail" href="/category/"><img class="img-responsive" src="/photo/DSC_0239-2.jpg"></a></div>
+        <div class="col-xs-6"><a class="thumbnail"><img class="img-responsive" src="/photo/DSC_2063.jpg"></a></div>
+        <div class="col-xs-6"><a class="thumbnail"><img class="img-responsive" src="/photo/DSC_1995.jpg"></a></div>
+        <div class="col-xs-6"><a class="thumbnail"><img class="img-responsive" src="/photo/DSC_1862.jpg"></a></div>
+      </div>
+      -->
+
+      <div class="page-header">
+        <h4>Albums</h4>
+      </div>
+      <div>
+        <ul>
+          <li><a href="/photo/2016/">2016</a></li>
+          <li><a href="/photo/2015/">2015</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- middle page -->
+    <div class="col-xs-6">
+      {{range .Articles}}
+      <div class="page-header">
+        {{template "/blog/title.html" .}}
+      </div>
+      <div class="article-body">
+        {{if .Thumbnail}}<a href="/blog/{{.ID}}"><img src="{{.Thumbnail}}"/></a>{{end}}
+        <p>{{.Abstract}}</p>
+        <p class="text-right"><a href="/blog/{{.ID}}">Continue reading</a></p>
+      </div>
+      {{end}}
+      <nav>
+        <ul class="pager">
+          {{if gt .Page 0}}<li class="previous" disabled><a href="?page={{.PrevPage}}">&larr; Newer</a></li>{{end}}
+          <li class="next"><a href="?page={{.NextPage}}">Older &rarr;</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- right page -->
+    <div class="col-xs-3">
+      <div class="page-header">
+        <h4>Search</h4>
+      </div>
+      <div>
+        <form method="GET" action="search" class="form">
+          <input type="text" name="q" class="form-control" placeholder="Go!"/>
+        </form>
+      </div>
+
+      <div class="page-header">
+        <h4>Recent Comments</h4>
+      </div>
+      <div>
+        <ul>
+          {{range .Comments}}
+          <li><strong>{{.Name}}:</strong> <small><em>{{.Content}}</em></small> <a href="/blog/{{.ArticleID}}#comment{{.ID}}">read more</a></li>
+          {{end}}
+        </ul>
+      </div>
+
+      <div class="page-header">
+        <h4>Category</h4>
+      </div>
+      <div>
+        <ul>
+          {{range .Category}}
+          <li><a href="/category/{{. | urlquery}}">{{.}}</a></li>
+          {{end}}
+        </ul>
+      </div>
+
+      <div class="page-header">
+        <h4>Friends</h4>
+      </div>
+      <div>
+        <ul>
+          <li><a href="https://blog.shenlifeng.com">qblackstone</a></li>
+          <li><a href="http://imkerwin.com">kerwin</a></li>
+        </ul>
+      </div>
+      {{template "/common/license.html"}}
+    </div>
+  </div>
+  {{template "/common/footer.html"}}
+</div>
+</body>
+</html>

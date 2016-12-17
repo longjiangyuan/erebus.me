@@ -1,0 +1,48 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="/">
+			<img class="brand" src="/favicon.ico">
+			<a class="navbar-brand" href="/">Erebus.me</a>
+		</a>
+	</div>
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<ul class="nav navbar-nav">
+			<li role="presentation" class="navbar-dir"><a href="/blog/">Blog</a></li>
+      <li role="presentation" class="narbar-dir"><a href="/photo/">Photo</a></li>
+			<!--li role="presentation" class="narbar-dir"><a href="/chat/">Chat</a></li-->
+		</ul>
+		{{if .}}
+		<ul class="nav navbar-nav navbar-right">
+			{{if .Login}}
+      <li class="dropdown">
+				<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+					<img src="{{.Login.AvatarURL}}" class="img-circle" style="width:20px; width:20px;"/>&nbsp;{{.Login.Nickname}} <span class="caret"></span>
+				</a>
+        <ul class="dropdown-menu" role="menu">
+					<li><a href="/blog/?edit">New Post</a></li>
+					<li><a href="/profile">Profile</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+			</li>
+			{{else}}
+			<li>
+				<a href="/login">Sign in</a>
+			</li>
+			{{end}}
+    </ul>
+		{{end}}
+	</div>
+</div>
+</nav>
+<script>
+(function() {
+	$('.navbar-dir a').each(function(index, target) {
+		var self = $(target);
+		if (location.pathname.indexOf(self.attr('href')) == 0) {
+			self.parent().addClass("active");
+		}
+		return true;
+	});
+})();
+</script>

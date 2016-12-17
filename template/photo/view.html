@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+{{template "/common/head.html"}}
+<title>Erebus.me</title>
+</head>
+<body>
+{{template "/common/nav.html"}}
+<div class="container">
+  <div class="row">
+    <div class="col-xs-8">
+      <div class="page-header">
+        <h4>{{.Filename}}</h4>
+      </div>
+      <div class="article-body">
+        {{if .Next}}
+        <a href="/photo/{{.Dirname}}{{.Next}}?view"><img src="/photo/{{.Path}}" class="img-responsive"></a>
+        {{else}}
+        <img src="/photo/{{.Path}}" class="img-responsive">
+        {{end}}
+      </div>
+      <ul class="pager">
+        {{if .Prev}}<li class="previous" disabled><a href="/photo/{{.Dirname}}{{.Prev}}?view">&larr; Prev</a></li>{{end}}
+        {{if .Next}}<li class="next"><a href="/photo/{{.Dirname}}{{.Next}}?view">Next &rarr;</a></li>{{end}}
+      </ul>
+    </div>
+
+    <div class="col-xs-4">
+      <!-- exif -->
+      <div class="page-header">
+        <h4>Meta</h4>
+      </div>
+      <div class="article-body">
+        <table class="table">
+          <tbody>
+            <tr><td style="width:50%">Shutter Speed</td><td style="width:50%">{{.Exif.ShutterSpeed}}</td></tr>
+            <tr><td>Aperture</td><td>{{.Exif.Aperture}}</td></tr>
+            <tr><td>Focal Length</td><td>{{.Exif.FocalLength}}</td></tr>
+            <tr><td>ISO</td><td>{{.Exif.ISO}}</td></tr>
+            <tr><td>Model</td><td>{{.Exif.Model}}</td></tr>
+            <tr><td>Lens Model</td><td>{{.Exif.LensModel}}</td></tr>
+            <tr><td>Taken</td><td>{{.Exif.Taken}}</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <!--license-->
+      {{template "/common/license.html"}}
+    </div>
+  </div>
+  {{template "/common/footer.html"}}
+</div>
+</body>
+</html>

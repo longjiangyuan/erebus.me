@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+{{template "/common/head.html"}}
+<title>Photos - Erebus.me</title>
+</head>
+<body>
+{{if not .CKEditorFuncNum}}
+{{template "/common/nav.html"}}
+<div class="container">
+{{else}}
+{{template "/photo/nav.html"}}
+<div class="container-fluid">
+{{end}}
+  <div class="row">
+    <!-- left -->
+    <div class="col-xs-3">
+      <div class="page-header">
+        <h4>Folders</h4>
+      </div>
+      <div>
+        <ul class="nav nav-pills nav-stacked" role="tablist">
+          {{if ne $.Root "/"}}
+          <li role="presentation"><a href="..{{if $.CKEditorFuncNum}}?CKEditorFuncNum={{$.CKEditorFuncNum}}{{end}}" class="glyphicon glyphicon-folder-close">  ..</a></li>
+          {{end}}
+          {{range .Dirs}}
+          <li role="presentation"><a href="{{.}}/{{if $.CKEditorFuncNum}}?CKEditorFuncNum={{$.CKEditorFuncNum}}{{end}}" class="glyphicon glyphicon-folder-open">  {{.}}</a></li>
+          {{end}}
+        </ul>
+      </div>
+    </div>
+    <!-- right -->
+    <div class="col-xs-9">
+      <div class="page-header">
+        <h4>Photos</h4>
+      </div>
+      <div class="row">
+        {{range .Files}}
+        <div class="col-xs-3">
+          <a href="{{if $.CKEditorFuncNum}}javascript:void(0){{else}}/photo/{{$.Root}}{{.}}?view{{end}}" class="thumbnail"><img src="/photo/{{$.Root}}{{.}}"></a>
+        </div>
+        {{end}}
+      </div>
+    </div>
+  </div>
+  {{template "/common/footer.html"}}
+</div>
+{{if .CKEditorFuncNum}}
+<script>
+(function() {
+  $('img').click(function(e) {
+    e.preventDefault();
+    //alert(CKEditorFuncNum);
+    //alert(e.target.getAttribute('data-src'));
+
+    window.opener.CKEDITOR.tools.callFunction({{.CKEditorFuncNum}}, e.target.getAttribute('src'));
+    window.close();
+  });
+})();
+</script>
+{{end}}
+</body>
+</html>

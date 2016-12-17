@@ -1,0 +1,8 @@
+<div style="padding-top: 20px">
+  <ol class="breadcrumb">
+    <li><a href="/photo/"><span class="glyphicon glyphicon-home"></span></a></li>
+    {{range .}}
+    <li><a href="/photo/{{.Path}}">{{.Name}}</a></li>
+    {{end}}
+  </ol>
+</div>

@@ -1,0 +1,5 @@
+{
+  "BaseDir": "/home/long/goproject/src/erebus.me",
+  "DataSource": "username:password@tcp(127.0.0.1:3306)/erebus?charset=utf8",
+  "Listen": ":8080"
+}
