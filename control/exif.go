@@ -26,7 +26,7 @@ func (info *ExifFormatter) Format(x *exif.Exif) {
 	info.ISO = formatExifISOSpeedRating(x)
 
 	if tm, err := x.DateTime(); err == nil {
-		info.Taken = tm.Format("02/Jan/2006 15:04:05")
+		info.Taken = tm.Format("Jan _2, 2006 15:04")
 	}
 }
 

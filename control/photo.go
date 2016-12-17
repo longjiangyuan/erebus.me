@@ -68,6 +68,10 @@ func (photo *Photo) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func (photo *Photo) Post(w http.ResponseWriter, r *http.Request) {
+	if model.GetLogin(r) == nil {
+		panic("Not login")
+	}
+
 	mulitpart, err := r.MultipartReader()
 	if err != nil {
 		panic(err)
