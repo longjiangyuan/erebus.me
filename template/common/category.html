@@ -1,0 +1,9 @@
+<div class="page-header">
+  <h4>Category</h4>
+</div>
+<div>
+  <ul>
+    <li><a href="/category/default">default</a></li>
+    {{range .}}<li><a href="/category/{{.}}">{{.}}</a></li>{{end}}
+  </ul>
+</div>

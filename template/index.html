@@ -37,16 +37,7 @@
 
     <!-- middle page -->
     <div class="col-xs-6">
-      {{range .Articles}}
-      <div class="page-header">
-        {{template "/blog/title.html" .}}
-      </div>
-      <div class="article-body">
-        {{if .Thumbnail}}<a href="/blog/{{.ID}}"><img src="{{.Thumbnail}}"/></a>{{end}}
-        <p>{{.Abstract}}</p>
-        <p class="text-right"><a href="/blog/{{.ID}}">Continue reading</a></p>
-      </div>
-      {{end}}
+      {{template "/blog/list.html" .Articles}}
       <nav>
         <ul class="pager">
           {{if gt .Page 0}}<li class="previous" disabled><a href="?page={{.PrevPage}}">&larr; Newer</a></li>{{end}}
@@ -77,16 +68,7 @@
         </ul>
       </div>
 
-      <div class="page-header">
-        <h4>Category</h4>
-      </div>
-      <div>
-        <ul>
-          {{range .Category}}
-          <li><a href="/category/{{. | urlquery}}">{{.}}</a></li>
-          {{end}}
-        </ul>
-      </div>
+      {{template "/common/category.html" .Category}}
 
       <div class="page-header">
         <h4>Friends</h4>

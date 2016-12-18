@@ -1,0 +1,10 @@
+{{range .}}
+<div class="page-header">
+  {{template "/blog/title.html" .}}
+</div>
+<div class="article-body">
+  {{if .Thumbnail}}<a href="/blog/{{.ID}}"><img src="{{.Thumbnail}}"/></a>{{end}}
+  <p>{{.Abstract}}</p>
+  <p class="text-right"><a href="/blog/{{.ID}}">Continue reading</a></p>
+</div>
+{{end}}

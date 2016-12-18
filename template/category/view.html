@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+{{template "/common/head.html"}}
+<title>{{.Name}} - Erebus.me</title>
+</head>
+<body>
+{{template "/common/nav.html"}}
+<div class="container">
+  <div class="row">
+    <div class="col-xs-3">
+    </div>
+    <div class="col-xs-6">
+      {{template "/blog/list.html" .Articles}}
+    </div>
+    <div class="col-xs-3">
+      {{template "/common/category.html" .Category}}
+    </div>
+  </div>
+  {{template "/common/footer.html"}}
+</body>
+</html>

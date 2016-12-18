@@ -176,12 +176,3 @@ func ArticlesByTime(offset int, limit int) Articles {
 	defer rows.Close()
 	return scanArticles(rows)
 }
-
-func ArticlesByCategory(category int) Articles {
-	rows, err := db.Query("SELECT "+articleFields+" FROM article,category WHERE article.category=?", category)
-	if err != nil {
-		Fatal(http.StatusInternalServerError, err.Error())
-	}
-	defer rows.Close()
-	return scanArticles(rows)
-}

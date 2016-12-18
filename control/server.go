@@ -66,3 +66,7 @@ func ListenAndServe(addr string) {
 	err := http.ListenAndServe(addr, &server)
 	log.Fatal(err)
 }
+
+func StripPrefix(prefix string, handler http.Handler) {
+	http.Handle(prefix, http.StripPrefix(prefix, handler))
+}

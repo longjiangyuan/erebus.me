@@ -28,3 +28,12 @@ func Categorys() []string {
 	}
 	return list
 }
+
+func ArticlesByCategory(category string) Articles {
+	rows, err := db.Query("SELECT "+articleFields+" FROM article WHERE article.category=?", category)
+	if err != nil {
+		Fatal(http.StatusInternalServerError, err.Error())
+	}
+	defer rows.Close()
+	return scanArticles(rows)
+}
