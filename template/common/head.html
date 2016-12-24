@@ -23,8 +23,10 @@ $(document).ready(function() {
   $('#container').bind('pjax:start', function() {
     progress.show();
     progressBar[0].style.width = '0%';
-  }).bind('pjax:success', function() {
-    $('.navbar-dir a').each(function(index, target) {
+  }).bind('pjax:end', function() {
+    /*
+    $('li.navbar-dir a').each(function(index, target) {
+      console.log(location.pathname, target.href);
       var self = $(target);
       if (location.pathname.indexOf(self.attr('href')) == 0) {
         self.parent().addClass("active");
@@ -33,6 +35,7 @@ $(document).ready(function() {
       }
       return true;
     });
+    */
 
     setTimeout(function() {
       progress.hide();
