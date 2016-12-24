@@ -44,7 +44,7 @@
   <div>
     <ul>
       {{range .Comments}}
-      <li><strong>{{.Name}}:</strong> <small><em>{{.Content}}</em></small> <a href="/blog/{{.ArticleID}}#comment{{.ID}}">read more</a></li>
+      <li><strong>{{.Name}}:</strong> <small><em>{{.Content}}</em></small> <a href="/blog/{{.ArticleID}}#comment{{.ID}}" data-pjax>read more</a></li>
       {{end}}
     </ul>
   </div>
@@ -60,8 +60,7 @@
   </div>
   <div>
     <ul>
-      <li><a href="/photo/2016/">2016</a></li>
-      <li><a href="/photo/2015/">2015</a></li>
+      <li><a href="/photo/2016/" data-pjax>2016</a></li>
     </ul>
   </div>
 </div>

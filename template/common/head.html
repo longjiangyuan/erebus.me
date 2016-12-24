@@ -39,6 +39,6 @@ $(document).ready(function() {
     }, 500);
   });
 
-  $(document).pjax('a[data-pjax]', '#container', {xhrFields: {onprogress: onprogress}});
+  $(document).pjax('a', '#container', {xhrFields: {onprogress: onprogress}});
 });
 </script>
