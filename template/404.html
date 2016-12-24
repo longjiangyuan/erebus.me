@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+{{template "/common/head.html"}}
+<!--<link href="/css/style.css" rel="stylesheet" type="text/css" media="all" />-->
+<title>erebus.me</title>
+</head>
+<body>
+{{template "/common/nav.html"}}
+<div class="container">
+  <div class="text-center" style="min-height: 400px">
+    <h2>{{.Code}} {{.Status}}</h2>
+    <hr>
+    <code>{{.Message}}</code>
+  </div>
+  {{template "/common/footer.html"}}
+</div>
+</body>
+</html>

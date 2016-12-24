@@ -12,7 +12,7 @@ type Category struct {
 
 func init() {
 	var category Category
-	StripPrefix("/category/", &category)
+	pjax.StripPrefix("/category/", &category)
 }
 
 func (category *Category) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -23,7 +23,7 @@ func (category *Category) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if r.URL.Path == "" {
-		view.NotFound(w)
+		view.NotFound(w, r)
 		return
 	}
 

@@ -1,10 +1,9 @@
 <h4>
-  <!--a href="/blog/{{.ID}}">{{.Title}}</a-->
   <div class="row">
     <div class="col-xs-9">
-      <a href="/blog/{{.ID}}">{{.Title}}</a>
+      <a href="/blog/{{.ID}}" data-pjax>{{.Title}}</a>
       <small>
-        <a href="/category/{{.Category|urlquery}}" class="label label-default">{{.Category}}</a>
+        <a href="/category/{{.Category|urlquery}}" data-pjax class="label label-default">{{.Category}}</a>
         <em>by {{.Author}} on {{.PostAt.Format "Jan _2, 2006 15:04"}}</em>
       </small>
     </div>

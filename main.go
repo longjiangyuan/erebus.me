@@ -4,11 +4,9 @@ import (
 	"encoding/json"
 	"log"
 	"os"
-	"path"
 
 	"erebus.me/control"
 	"erebus.me/model"
-	"erebus.me/view"
 )
 
 type Config struct {
@@ -37,12 +35,6 @@ func main() {
 	}
 
 	model.SetDataSource(config.DataSource)
-
-	templateDir := path.Join(config.BaseDir, "/template")
-	view.SetTemplateDir(templateDir)
-
-	documentRoot := path.Join(config.BaseDir, "/html")
-	view.SetDocumentRoot(documentRoot)
 
 	control.ListenAndServe(config.Listen)
 }

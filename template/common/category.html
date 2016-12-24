@@ -3,7 +3,7 @@
 </div>
 <div>
   <ul>
-    <li><a href="/category/default">default</a></li>
-    {{range .}}<li><a href="/category/{{.}}">{{.}}</a></li>{{end}}
+    <li><a href="/category/default" data-target="content-main">default</a></li>
+    {{range .}}<li><a href="/category/{{.|urlquery}}" data-target="content-main">{{.}}</a></li>{{end}}
   </ul>
 </div>

@@ -1,0 +1,9 @@
+<div class="col-md-7">
+  {{template "/blog/list.html" .Articles}}
+  <nav>
+    <ul class="pager">
+      {{if gt .Page 0}}<li class="previous" disabled><a href="?page={{.PrevPage}}">&larr; Newer</a></li>{{end}}
+      <li class="next"><a href="?page={{.NextPage}}">Older &rarr;</a></li>
+    </ul>
+  </nav>
+</div>

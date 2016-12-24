@@ -1,22 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-{{template "/common/head.html"}}
-<script src="/ckeditor/ckeditor.js"></script>
-<title>{{if .Article.Title}}Edit {{.Article.Title}}{{else}}New Post{{end}} - Erebus.me</title>
-<style>
-input.cke_dialog_ui_input_text {
-  color: #000;
-}
-textarea.cke_source {
-  color: #000;
-}
-</style>
-</head>
-<body>
-{{template "/common/nav.html"}}
-<div class="container">
-  <div class="row">
+<div class="row" id="container">
     <div class="col-xs-12">
       <form method="POST" id="form">
         <div class="form-group">
@@ -42,19 +24,10 @@ textarea.cke_source {
       <br>
       <br>
     </div>
-  </div>
 </div>
+<script src="/ckeditor/ckeditor.js"></script>
 <script>
 (function() {
-  var editor = CKEDITOR.replace('content', {
-    //toolbar: ['source','save','/','save'],
-    contentsCss: "/css/darkstrap.css",
-    imageUploadUrl: '/photo/',
-    filebrowserImageBrowseUrl: '/photo/',
-    filebrowserImageUploadUrl: '/photo/?',
-    format_img: {element: 'img', attributes: {class: 'img-responsive'}},
-  });
+  var editor = CKEDITOR.replace('content');
 })();
 </script>
-</body>
-</html>

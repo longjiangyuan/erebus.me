@@ -12,13 +12,13 @@ import (
 )
 
 func init() {
-	http.HandleFunc("/login", Login)
-	http.HandleFunc("/logout", Logout)
+	pjax.HandleFunc("/", Home)
+	pjax.HandleFunc("/login", Login)
+	pjax.HandleFunc("/logout", Logout)
 }
 
-func Index(w http.ResponseWriter, r *http.Request) {
+func Home(w http.ResponseWriter, r *http.Request) {
 	var data struct {
-		Login    *model.User
 		Articles model.Articles
 		Category []string
 		Comments []*model.Comment
@@ -28,8 +28,6 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	}
 
 	const PageSize = 5
-
-	data.Login = model.GetLogin(r)
 	data.Page = FormInt(r, "page", 0)
 	data.NextPage = data.Page + 1
 	data.PrevPage = data.Page - 1
@@ -83,14 +81,4 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		}
 		http.Redirect(w, r, callback, http.StatusFound)
 	}
-}
-
-type RightPage struct {
-	Category []string
-}
-
-func getRightPage() *RightPage {
-	var right RightPage
-	right.Category = model.Categorys()
-	return &right
 }

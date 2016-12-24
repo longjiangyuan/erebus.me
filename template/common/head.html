@@ -1,32 +1,44 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Erebus.me</title>
+<link rel="shortcut icon" type="image/icon" href="/img/favicon.ico" />
 <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="/css/darkstrap.css">
-<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<style>
-.navbar {
-  border-radius: 0;
-}
-.article-body img {
-  max-width: 100%;
-  height: auto;
-  padding: 0px 0px 10px 0px;
-}
-img.brand {
-  padding: 0px;
-	margin: 0px;
-	border: none;
-  height: 20px;
-  outline: 0px;
-}
-body {
-  padding-top: 50px;
-}
-/*
-div.container {
-  min-width: 400px;
-}
-*/
-</style>
+<script src="//cdn.bootcss.com/jquery.pjax/1.9.6/jquery.pjax.js"></script>
+<link rel="stylesheet" href="/ckeditor/plugins/codesnippet/lib/highlight/styles/tomorrow-night.css">
+<script src="/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
+<script>
+$(document).ready(function() {
+  var progress = $('#loadpage-progress');
+  var progressBar = $('#loadpage-progress-bar');
+
+  function onprogress(e) {
+    var percent = parseInt(100 * e.loaded / e.total);
+    progressBar[0].style.width = percent + '%';
+  }
+
+  $('#container').bind('pjax:start', function() {
+    progress.show();
+    progressBar[0].style.width = '0%';
+  }).bind('pjax:success', function() {
+    $('.navbar-dir a').each(function(index, target) {
+      var self = $(target);
+      if (location.pathname.indexOf(self.attr('href')) == 0) {
+        self.parent().addClass("active");
+      } else {
+        self.parent().removeClass("active");
+      }
+      return true;
+    });
+
+    setTimeout(function() {
+      progress.hide();
+    }, 500);
+  });
+
+  $(document).pjax('a[data-pjax]', '#container', {xhrFields: {onprogress: onprogress}});
+});
+</script>

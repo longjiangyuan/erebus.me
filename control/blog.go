@@ -13,7 +13,7 @@ import (
 func init() {
 	var blog Blog
 
-	http.Handle("/blog/", http.StripPrefix("/blog/", &blog))
+	pjax.StripPrefix("/blog/", &blog)
 }
 
 type Blog struct {
@@ -25,12 +25,12 @@ func (blog *Blog) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "" {
 		id, err := strconv.Atoi(r.URL.Path)
 		if err != nil {
-			view.NotFound(w)
+			view.NotFound(w, r)
 			return
 		}
 
 		if article = model.ArticleByID(id); article == nil {
-			view.NotFound(w)
+			view.NotFound(w, r)
 			return
 		}
 	} else {
@@ -43,7 +43,7 @@ func (blog *Blog) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		if _, ok := q["edit"]; ok {
 			blog.Edit(article, w, r)
 		} else if r.URL.Path == "" {
-			blog.Index(w, r)
+			//blog.Index(w, r)
 		} else {
 			blog.Get(article, w, r)
 		}
@@ -54,6 +54,24 @@ func (blog *Blog) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			blog.Post(article, w, r)
 		}
 	}
+}
+
+func (blog *Blog) Index(w http.ResponseWriter, r *http.Request) {
+	var data struct {
+		Articles model.Articles
+		Page     int
+		PrevPage int
+		NextPage int
+	}
+
+	const PageSize = 5
+
+	data.Page = FormInt(r, "page", 0)
+	data.NextPage = data.Page + 1
+	data.PrevPage = data.Page - 1
+
+	data.Articles = model.ArticlesByTime(data.Page*PageSize, PageSize)
+	view.Render(w, "/blog/index.html", &data)
 }
 
 func (blog *Blog) Edit(article *model.Article, w http.ResponseWriter, r *http.Request) {
@@ -76,9 +94,6 @@ func (blog *Blog) Edit(article *model.Article, w http.ResponseWriter, r *http.Re
 		data.Content = template.HTML(article.Content())
 	}
 	view.Render(w, "/blog/edit.html", &data)
-}
-
-func (blog *Blog) Index(w http.ResponseWriter, r *http.Request) {
 }
 
 func saveFormToCookie(w http.ResponseWriter, r *http.Request, name string) string {
@@ -106,7 +121,6 @@ func (blog *Blog) Get(article *model.Article, w http.ResponseWriter, r *http.Req
 		Content  template.HTML
 		Comments []*model.Comment
 		Related  model.Articles
-		Category []string
 
 		Visitor struct {
 			Name  string
@@ -127,11 +141,10 @@ func (blog *Blog) Get(article *model.Article, w http.ResponseWriter, r *http.Req
 
 	data.Login = model.GetLogin(r)
 	data.Article = article
-	data.Category = model.Categorys()
-	data.Related = model.ArticlesByCategroy(article.Category)
 	data.Comments = article.Comments()
 	data.Article.NumComments = len(data.Comments)
 	data.Content = template.HTML(article.Content())
+	data.Related = model.ArticlesByCategroy(article.Category)
 	view.Render(w, "/blog/view.html", data)
 }
 

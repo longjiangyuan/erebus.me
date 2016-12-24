@@ -8064,3 +8064,38 @@ select::-webkit-scrollbar-thumb {
   filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
   background-repeat: repeat-x;
 }
+
+.navbar {
+  border-radius: 0;
+}
+.article-body img {
+  max-width: 100%;
+  height: auto;
+  padding: 0px 0px 10px 0px;
+}
+img.brand {
+  padding: 0px;
+  margin: 0px;
+  border: none;
+  height: 20px;
+  outline: 0px;
+}
+body {
+  padding-top: 50px;
+}
+/*
+div.container {
+  min-width: 400px;
+}
+*/
+.progress {
+  height: 2px;
+  margin-bottom: 0px;
+}
+
+input.cke_dialog_ui_input_text {
+  color: #000;
+}
+textarea.cke_source {
+  color: #000;
+}

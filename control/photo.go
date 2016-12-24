@@ -19,10 +19,10 @@ import (
 )
 
 func init() {
-	photo := Photo{"html/photo/"}
-	http.Handle("/photo/", http.StripPrefix("/photo/", &photo))
-
 	exif.RegisterParsers(mknote.All...)
+
+	photo := Photo{"html/photo/"}
+	pjax.StripPrefix("/photo/", &photo)
 }
 
 type Photo struct {
@@ -36,7 +36,7 @@ func (photo *Photo) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if file, err := os.Open(filename); err == nil {
 		target = file
 	} else if os.IsNotExist(err) {
-		view.NotFound(w)
+		view.NotFound(w, r)
 		return
 	} else {
 		panic(err)
@@ -62,7 +62,7 @@ func (photo *Photo) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		if info.IsDir() {
 			photo.Post(w, r)
 		} else {
-			view.NotFound(w)
+			view.NotFound(w, r)
 		}
 	}
 }

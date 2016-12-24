@@ -1,50 +1,98 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-{{template "/common/head.html"}}
-<title>Photos - Erebus.me</title>
-</head>
-<body>
-{{if not .CKEditorFuncNum}}
-{{template "/common/nav.html"}}
-<div class="container">
-{{else}}
-{{template "/photo/nav.html"}}
-<div class="container-fluid">
+{{if .CKEditorFuncNum}}
+<script>
+function toggleUploadDialog() {
+  $('#upload-dialog').modal('toggle');
+}
+function toggleNewFolderDialog() {
+  $('#newfolder-dialog').modal('toggle');
+}
+</script>
+<div class="modal fade" id="newfolder-dialog">
+  <div class="modal-dialog" role="dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Create Folder</h4>
+      </div>
+      <div class="modal-body">
+        <form method="post">
+          <div class="form-group">
+            <input type="text" class="form-control" name="folder" placeholder="Input folder name">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="modal fade" id="upload-dialog">
+  <div class="modal-dialog" role="dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Upload file</h4>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="" enctype="multipart/form-data">
+          <input type="hidden" name="upload"/>
+          <div class="form-group">
+            <input type="file" class="form-control" name="image">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 {{end}}
-  <div class="row">
-    <!-- left -->
-    <div class="col-xs-3">
-      <div class="page-header">
-        <h4>Folders</h4>
-      </div>
-      <div>
-        <ul class="nav nav-pills nav-stacked" role="tablist">
-          {{if ne $.Root "/"}}
-          <li role="presentation"><a href="..{{if $.CKEditorFuncNum}}?CKEditorFuncNum={{$.CKEditorFuncNum}}{{end}}" class="glyphicon glyphicon-folder-close">  ..</a></li>
-          {{end}}
-          {{range .Dirs}}
-          <li role="presentation"><a href="{{.}}/{{if $.CKEditorFuncNum}}?CKEditorFuncNum={{$.CKEditorFuncNum}}{{end}}" class="glyphicon glyphicon-folder-open">  {{.}}</a></li>
-          {{end}}
-        </ul>
-      </div>
-    </div>
-    <!-- right -->
-    <div class="col-xs-9">
-      <div class="page-header">
-        <h4>Photos</h4>
-      </div>
-      <div class="row">
-        {{range .Files}}
-        <div class="col-xs-3">
-          <a href="{{if $.CKEditorFuncNum}}javascript:void(0){{else}}/photo/{{$.Root}}{{.}}?view{{end}}" class="thumbnail"><img src="/photo/{{$.Root}}{{.}}"></a>
-        </div>
-        {{end}}
-      </div>
-    </div>
+<!-- left -->
+<div class="col-xs-3">
+  <div class="page-header">
+    <h4>Folders</h4>
   </div>
-  {{template "/common/footer.html"}}
+  <div>
+    <ul class="nav nav-pills nav-stacked" role="tablist">
+      {{if .CKEditorFuncNum}}
+      <li role="presentation">
+        <a href="javascript:void(0)" onclick="toggleNewFolderDialog()">
+          <span class="glyphicon glyphicon-plus-sign"></span> NewFolder
+        </a>
+      </li>
+      <li role="presentation">
+        <a href="javascript:void(0)" onclick="toggleUploadDialog()">
+          <span class="glyphicon glyphicon-upload"></span> Upload
+        </a>
+      </li>
+      {{end}}
+      {{if ne $.Root "/"}}
+      <li role="presentation">
+        <a href="..{{if $.CKEditorFuncNum}}?CKEditorFuncNum={{$.CKEditorFuncNum}}{{end}}">
+          <span class="glyphicon glyphicon-folder-close"></span> ..
+        </a>
+      </li>
+      {{end}}
+      {{range .Dirs}}
+      <li role="presentation">
+        <a href="{{.}}/{{if $.CKEditorFuncNum}}?CKEditorFuncNum={{$.CKEditorFuncNum}}{{end}}">
+          <span class="glyphicon glyphicon-folder-close"></span> {{.}}
+        </a>
+      </li>
+      {{end}}
+    </ul>
+  </div>
+</div>
+<!-- right -->
+<div class="col-xs-9">
+  <div class="page-header">
+    <h4>Photos</h4>
+  </div>
+  <div class="row">
+    {{range .Files}}
+    <div class="col-xs-3">
+      <a href="{{if $.CKEditorFuncNum}}javascript:void(0){{else}}/photo/{{$.Root}}{{.}}?view{{end}}" class="thumbnail"><img src="/photo/{{$.Root}}{{.}}"></a>
+    </div>
+    {{end}}
+  </div>
 </div>
 {{if .CKEditorFuncNum}}
 <script>
@@ -60,5 +108,3 @@
 })();
 </script>
 {{end}}
-</body>
-</html>
