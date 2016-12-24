@@ -89,7 +89,9 @@ function toggleNewFolderDialog() {
   <div class="row">
     {{range .Files}}
     <div class="col-xs-3">
-      <a href="{{if $.CKEditorFuncNum}}javascript:void(0){{else}}/photo/{{$.Root}}{{.}}?view{{end}}" class="thumbnail"><img src="/photo/{{$.Root}}{{.}}"></a>
+      <a href="{{if $.CKEditorFuncNum}}javascript:void(0){{else}}/gallery/{{$.Root}}{{.}}{{end}}" class="thumbnail">
+        <img src="/photo/{{$.Root}}{{.}}">
+      </a>
     </div>
     {{end}}
   </div>

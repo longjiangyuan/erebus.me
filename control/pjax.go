@@ -87,7 +87,6 @@ func (pjax *PjaxHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			path = path[:n-1]
 		}
 		if idx := strings.LastIndexByte(path, '/'); idx >= 0 {
-			//log.Printf("path %s not found, try %s", path, path[:idx+1])
 			path = path[:idx+1]
 		}
 	}

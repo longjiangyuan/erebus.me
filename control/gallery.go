@@ -21,15 +21,15 @@ import (
 func init() {
 	exif.RegisterParsers(mknote.All...)
 
-	photo := Photo{"html/photo/"}
-	pjax.StripPrefix("/photo/", &photo)
+	photo := Gallery{"html/photo/"}
+	pjax.StripPrefix("/gallery/", &photo)
 }
 
-type Photo struct {
+type Gallery struct {
 	root string
 }
 
-func (photo *Photo) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (photo *Gallery) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	var target *os.File
 	filename := path.Join(photo.root, r.URL.Path)
 
@@ -50,13 +50,10 @@ func (photo *Photo) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	switch r.Method {
 	case "GET":
-		q := r.URL.Query()
 		if info.IsDir() {
 			photo.Index(target, w, r)
-		} else if _, ok := q["view"]; ok {
-			photo.View(target, w, r)
 		} else {
-			http.ServeContent(w, r, target.Name(), info.ModTime(), target)
+			photo.View(target, w, r)
 		}
 	case "POST":
 		if info.IsDir() {
@@ -67,7 +64,7 @@ func (photo *Photo) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (photo *Photo) Post(w http.ResponseWriter, r *http.Request) {
+func (photo *Gallery) Post(w http.ResponseWriter, r *http.Request) {
 	if model.GetLogin(r) == nil {
 		panic("Not login")
 	}
@@ -132,7 +129,7 @@ func (photo *Photo) Post(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (photo *Photo) openFile(pathname string) (*os.File, os.FileInfo, error) {
+func (photo *Gallery) openFile(pathname string) (*os.File, os.FileInfo, error) {
 	filename := path.Join(photo.root, pathname)
 
 	file, err := os.Open(filename)
@@ -148,7 +145,7 @@ func (photo *Photo) openFile(pathname string) (*os.File, os.FileInfo, error) {
 	return file, info, nil
 }
 
-func (photo *Photo) View(file *os.File, w http.ResponseWriter, r *http.Request) {
+func (photo *Gallery) View(file *os.File, w http.ResponseWriter, r *http.Request) {
 	var page struct {
 		Paths    []PathInfo
 		Path     string
@@ -234,7 +231,7 @@ func splitPath(pathname string) []PathInfo {
 	return paths
 }
 
-func (photo *Photo) Index(dir *os.File, w http.ResponseWriter, r *http.Request) {
+func (photo *Gallery) Index(dir *os.File, w http.ResponseWriter, r *http.Request) {
 	if !strings.HasSuffix(r.URL.Path, "/") {
 		r.URL.Path += "/"
 	}

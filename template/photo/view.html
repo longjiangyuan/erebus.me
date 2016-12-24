@@ -1,27 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-{{template "/common/head.html"}}
-<title>Erebus.me</title>
-</head>
-<body>
-{{template "/common/nav.html"}}
-<div class="container">
-  <div class="row">
+
     <div class="col-xs-8">
       <div class="page-header">
         <h4>{{.Filename}}</h4>
       </div>
       <div class="article-body">
         {{if .Next}}
-        <a href="/photo/{{.Dirname}}{{.Next}}?view"><img src="/photo/{{.Path}}" class="img-responsive"></a>
+        <a href="/gallery/{{.Dirname}}{{.Next}}"><img src="/photo/{{.Path}}" class="img-responsive"></a>
         {{else}}
         <img src="/photo/{{.Path}}" class="img-responsive">
         {{end}}
       </div>
       <ul class="pager">
-        {{if .Prev}}<li class="previous" disabled><a href="/photo/{{.Dirname}}{{.Prev}}?view">&larr; Prev</a></li>{{end}}
-        {{if .Next}}<li class="next"><a href="/photo/{{.Dirname}}{{.Next}}?view">Next &rarr;</a></li>{{end}}
+        {{if .Prev}}<li class="previous" disabled><a href="/gallery/{{.Dirname}}{{.Prev}}">&larr; Prev</a></li>{{end}}
+        {{if .Next}}<li class="next"><a href="/gallery/{{.Dirname}}{{.Next}}">Next &rarr;</a></li>{{end}}
       </ul>
     </div>
 
@@ -46,8 +37,3 @@
       <!--license-->
       {{template "/common/license.html"}}
     </div>
-  </div>
-  {{template "/common/footer.html"}}
-</div>
-</body>
-</html>
