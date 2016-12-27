@@ -44,8 +44,8 @@
           {{if .ReplyTo}}
           <div class="well quote">
             <strong>
-              {{if .ReplyTo.URL}}<a href="{{.ReplyTo.URL}}" target="_blank"><span class="glyphicon glyphicon-user"></span> {{.ReplyTo.Name}}:</a>
-              {{else}}<span class="glyphicon glyphicon-user"></span> {{.ReplyTo.Name}}:
+              {{if .ReplyTo.URL}}<a href="{{.ReplyTo.URL}}" target="_blank">{{.ReplyTo.Name}}:</a>
+              {{else}}{{.ReplyTo.Name}}:
               {{end}}
             </strong>
             {{.ReplyTo.Content}}
