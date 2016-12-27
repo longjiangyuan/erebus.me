@@ -1,7 +1,14 @@
 
     <div class="col-sm-9">
-      <div class="page-header">
-        <h4>{{.Filename}}</h4>
+      <div class="article-head">
+        <h4>
+          <ol class="breadcrumb">
+            <li><a href="/photo/"><span class="glyphicon glyphicon-th-large"></span></a></li>
+            {{range .Paths}}
+            <li><a href="/photo/{{.Path}}">{{.Name}}</a></li>
+            {{end}}
+          </ol>
+        </h4>
       </div>
       <div class="article-body">
         {{if .Next}}
