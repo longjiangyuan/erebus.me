@@ -26,7 +26,7 @@ func (f *ExifFormatter) LensModel() string {
 
 func (f *ExifFormatter) Taken() string {
 	if tm, err := f.x.DateTime(); err == nil {
-		return tm.Format("Jan _2, 2006 15:04")
+		return tm.Format("Jan _2, 2006")
 	}
 	return ""
 }
