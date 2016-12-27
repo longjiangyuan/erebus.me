@@ -22,6 +22,7 @@
         <h4>Meta</h4>
       </div>
       <div class="article-body">
+        {{if .Exif}}
         <table class="table">
           <tbody>
             <tr><td style="width:50%">Shutter Speed</td><td style="width:50%">{{.Exif.ShutterSpeed}}</td></tr>
@@ -33,6 +34,7 @@
             <tr><td>Taken</td><td>{{.Exif.Taken}}</td></tr>
           </tbody>
         </table>
+        {{end}}
       </div>
       <!--license-->
       {{template "/common/license.html"}}

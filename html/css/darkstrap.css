@@ -8068,6 +8068,15 @@ select::-webkit-scrollbar-thumb {
 .navbar {
   border-radius: 0;
 }
+.article-head {
+  padding-top: 30px;
+}
+
+.article-head hr {
+  /*margin-top: 10px;*/
+  margin-bottom: 10px;
+}
+
 .article-body img {
   max-width: 100%;
   height: auto;
@@ -8098,4 +8107,11 @@ input.cke_dialog_ui_input_text {
 }
 textarea.cke_source {
   color: #000;
+}
+
+.well.quote {
+    min-height: 20px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }

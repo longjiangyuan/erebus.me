@@ -1,5 +1,5 @@
 <!-- left page -->
-<div class="col-sm-3">
+<div class="col-sm-3 col-xs-0">
   {{template "/common/about.html"}}
   {{template "/common/friends.html"}}
   <!--
@@ -31,7 +31,7 @@
   <div>
     <ul>
       {{range .Comments}}
-      <li><strong>{{.Name}}:</strong> <small><em>{{.Content}}</em></small> <a href="/blog/{{.ArticleID}}#comment{{.ID}}" data-pjax>read more</a></li>
+      <li><strong>{{.Name}}:</strong> <small>{{.Content}}</small> <a href="/blog/{{.ArticleID}}#comment{{.ID}}" data-pjax>read more</a></li>
       {{end}}
     </ul>
   </div>
@@ -46,6 +46,5 @@
       <li><a href="/gallery/2016/" data-pjax>2016</a></li>
     </ul>
   </div>
-
   {{template "/common/license.html"}}
 </div>

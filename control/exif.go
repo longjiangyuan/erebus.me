@@ -8,15 +8,30 @@ import (
 )
 
 type ExifFormatter struct {
-	ShutterSpeed string
-	Aperture     string
-	FocalLength  string
-	ISO          string
-	Model        string
-	LensModel    string
-	Taken        string
+	x *exif.Exif
 }
 
+func NewExifFormatter(x *exif.Exif) *ExifFormatter {
+	return &ExifFormatter{x}
+}
+
+func (f *ExifFormatter) LensModel() string {
+	tag, err := f.x.Get(exif.LensModel)
+	if err != nil {
+		return ""
+	}
+	v, _ := tag.StringVal()
+	return v
+}
+
+func (f *ExifFormatter) Taken() string {
+	if tm, err := f.x.DateTime(); err == nil {
+		return tm.Format("Jan _2, 2006 15:04")
+	}
+	return ""
+}
+
+/*
 func (info *ExifFormatter) Format(x *exif.Exif) {
 	info.LensModel = formatExifLensModel(x)
 	info.Model = formatExifModel(x)
@@ -29,18 +44,10 @@ func (info *ExifFormatter) Format(x *exif.Exif) {
 		info.Taken = tm.Format("Jan _2, 2006 15:04")
 	}
 }
+*/
 
-func formatExifLensModel(x *exif.Exif) string {
-	tag, err := x.Get(exif.LensModel)
-	if err != nil {
-		return ""
-	}
-	v, _ := tag.StringVal()
-	return v
-}
-
-func formatExifISOSpeedRating(x *exif.Exif) string {
-	tag, err := x.Get(exif.ISOSpeedRatings)
+func (f *ExifFormatter) ISO() string {
+	tag, err := f.x.Get(exif.ISOSpeedRatings)
 	if err != nil {
 		return ""
 	}
@@ -51,8 +58,8 @@ func formatExifISOSpeedRating(x *exif.Exif) string {
 	return strconv.Itoa(i)
 }
 
-func formatExifFocalLength(x *exif.Exif) string {
-	tag, err := x.Get(exif.FocalLength)
+func (f *ExifFormatter) FocalLength() string {
+	tag, err := f.x.Get(exif.FocalLength)
 	if err != nil {
 		return ""
 	}
@@ -63,8 +70,8 @@ func formatExifFocalLength(x *exif.Exif) string {
 	return fmt.Sprintf("%d mm", numer/denom)
 }
 
-func formatExifExposeTime(x *exif.Exif) string {
-	tag, err := x.Get(exif.ExposureTime)
+func (f *ExifFormatter) ShutterSpeed() string {
+	tag, err := f.x.Get(exif.ExposureTime)
 	if err != nil {
 		return ""
 	}
@@ -81,8 +88,8 @@ func formatExifExposeTime(x *exif.Exif) string {
 	}
 }
 
-func formatExifFNumber(x *exif.Exif) string {
-	tag, err := x.Get(exif.FNumber)
+func (f *ExifFormatter) Aperture() string {
+	tag, err := f.x.Get(exif.FNumber)
 	if err != nil {
 		return ""
 	}
@@ -93,8 +100,8 @@ func formatExifFNumber(x *exif.Exif) string {
 	return fmt.Sprintf("f/%.1f", float64(numer)/float64(denom))
 }
 
-func formatExifModel(x *exif.Exif) string {
-	tag, err := x.Get(exif.Model)
+func (f *ExifFormatter) Model() string {
+	tag, err := f.x.Get(exif.Model)
 	if err != nil {
 		return ""
 	}
@@ -102,8 +109,8 @@ func formatExifModel(x *exif.Exif) string {
 	return v
 }
 
-func formatExifSoftware(x *exif.Exif) string {
-	tag, err := x.Get(exif.Software)
+func (f *ExifFormatter) Software() string {
+	tag, err := f.x.Get(exif.Software)
 	if err != nil {
 		return ""
 	}

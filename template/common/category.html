@@ -3,7 +3,6 @@
 </div>
 <div>
   <ul>
-    <li><a href="/category/default" data-target="content-main">default</a></li>
-    {{range .}}<li><a href="/category/{{.|urlquery}}" data-target="content-main">{{.}}</a></li>{{end}}
+    {{range .}}<li><a href="/category/{{.|urlquery}}" data-target="content-main">{{.}}</a> <!--span class="badge">42</span--></li>{{end}}
   </ul>
 </div>

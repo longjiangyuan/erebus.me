@@ -1,7 +1,5 @@
 {{range .}}
-<div class="page-header">
-  {{template "/blog/title.html" .}}
-</div>
+{{template "/blog/title.html" .}}
 <div class="article-body">
   {{if .Thumbnail}}<a href="/blog/{{.ID}}"><img src="{{.Thumbnail}}"/></a>{{end}}
   <p>{{.Abstract}}</p>

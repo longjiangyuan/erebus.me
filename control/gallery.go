@@ -151,7 +151,7 @@ func (photo *Gallery) View(file *os.File, w http.ResponseWriter, r *http.Request
 		Path     string
 		Filename string
 		Dirname  string
-		Exif     ExifFormatter
+		Exif     *ExifFormatter
 		Next     string
 		Prev     string
 	}
@@ -162,7 +162,7 @@ func (photo *Gallery) View(file *os.File, w http.ResponseWriter, r *http.Request
 
 	x, err := exif.Decode(file)
 	if err == nil {
-		page.Exif.Format(x)
+		page.Exif = NewExifFormatter(x)
 	}
 
 	dirname := path.Join(photo.root, page.Dirname)

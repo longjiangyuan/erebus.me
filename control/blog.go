@@ -162,6 +162,8 @@ func (blog *Blog) PostComment(article *model.Article, w http.ResponseWriter, r *
 		comment.URL = saveFormToCookie(w, r, "url")
 	}
 
+	comment.ReplyID, _ = strconv.Atoi(r.FormValue("replyto"))
+
 	if comment.Name == "" || comment.Email == "" {
 		model.Fatal(http.StatusNotAcceptable, "name and email is required")
 	}

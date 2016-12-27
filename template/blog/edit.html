@@ -8,7 +8,7 @@
         <div class="form-group">
           <label for="category">Category</label>
           <select class="form-control" name="category" id="category" placeholder="Input title here">
-            <option value="0" {{if eq .Article.Category "default"}}selected{{end}}>default</option>
+            <option value="" {{if eq .Article.Category "default"}}selected{{end}}>Uncategorized</option>
             {{range .Category}}
             <option value="{{.}}" {{if eq $.Article.Category .}}selected{{end}}>{{.}}</option>
             {{end}}

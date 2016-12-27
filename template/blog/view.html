@@ -1,8 +1,6 @@
-<!-- title -->
 <div class="col-sm-9">
-  <div class="page-header">
-    {{template "/blog/title.html" .Article}}
-  </div>
+  <!-- title -->
+  {{template "/blog/title.html" .Article}}
   <!--content-->
   <div class="article-body">
     {{.Content}}
@@ -19,18 +17,40 @@
     <div>
       <div id="comment{{.ID}}">
         <p>
-          <strong>
-            {{if .URL}}<a href="{{.URL}}">{{.Name}}</a>
-            {{else}}{{.Name}}
-            {{end}}
-          </strong>
-          <small><em>- {{.Time.Format "Jan _2, 2006 15:04 "}}</em></small>
+        <div class="row">
+          <div class="col-xs-3">
+            <strong>
+              {{if .URL}}<a href="{{.URL}}" target="_blank"><span class="glyphicon glyphicon-user"></span> {{.Name}}</a>
+              {{else}}<span class="glyphicon glyphicon-user"></span> {{.Name}}
+              {{end}}
+            </strong>
+          </div>
+          <div class="col-xs-3">
+            <small>
+              <span class="glyphicon glyphicon-calendar"></span>
+              {{.Time.Format "Jan _2, 2006"}}
+            </small>
+          </div>
+          <div class="col-xs-3">
+            <a href="#response" onclick="replyTo({{.ID}})">
+              <span class="glyphicon glyphicon-pencil"></span>
+              reply
+            </a>
+          </div>
+        </div>
         </p>
         <div class="well">
           {{.Content}}
-          <!--blockquote>
-          <small><em>{{.Name}}: {{.Content}}</em></small>
-        </blockquote-->
+          {{if .ReplyTo}}
+          <div class="well quote">
+            <strong>
+              {{if .ReplyTo.URL}}<a href="{{.ReplyTo.URL}}" target="_blank"><span class="glyphicon glyphicon-user"></span> {{.ReplyTo.Name}}:</a>
+              {{else}}<span class="glyphicon glyphicon-user"></span> {{.ReplyTo.Name}}:
+              {{end}}
+            </strong>
+            {{.ReplyTo.Content}}
+          </div>
+          {{end}}
       </div>
     </div>
     {{end}}
@@ -62,6 +82,7 @@
         <label for="comments">Comments</label>
         <textarea class="form-control" name="comments" id="comments" rows="5"></textarea>
       </div>
+      <input type="hidden" name="replyto" id="replyto" value="0">
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
@@ -81,4 +102,9 @@
 $('pre code').each(function(i, block) {
   hljs.highlightBlock(block);
 });
+function replyTo(id) {
+  console.log('reply to', id);
+  $('#replyto').val(id);
+  //$('#response')[0].scrollIntoView(true);
+}
 </script>
