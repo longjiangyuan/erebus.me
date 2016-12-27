@@ -118,9 +118,9 @@ func (photo *Gallery) Post(w http.ResponseWriter, r *http.Request) {
 			funcNum := r.URL.Query().Get("CKEditorFuncNum")
 			if redirect {
 				if funcNum != "" {
-					http.Redirect(w, r, "/photo/"+r.URL.Path+"?CKEditorFuncNum="+funcNum, http.StatusFound)
+					http.Redirect(w, r, "/gallery/"+r.URL.Path+"?CKEditorFuncNum="+funcNum, http.StatusFound)
 				} else {
-					http.Redirect(w, r, "/photo/"+r.URL.Path, http.StatusFound)
+					http.Redirect(w, r, "/gallery/"+r.URL.Path, http.StatusFound)
 				}
 			} else if funcNum != "" {
 				fmt.Fprintf(w, `<script type="text/javascript">window.parent.CKEDITOR.tools.callFunction("%s", "/photo/%s", "");</script>`, funcNum, filename)
