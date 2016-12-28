@@ -15,9 +15,10 @@ function toggleNewFolderDialog() {
         <h4 class="modal-title">Create Folder</h4>
       </div>
       <div class="modal-body">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
+          <input type="hidden" name="upload" value="1"/>
           <div class="form-group">
-            <input type="text" class="form-control" name="folder" placeholder="Input folder name">
+            <input type="text" class="form-control" name="mkdir" placeholder="Input folder name">
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>

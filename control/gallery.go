@@ -87,8 +87,17 @@ func (photo *Gallery) Post(w http.ResponseWriter, r *http.Request) {
 		if filename == "" {
 			if part.FormName() == "upload" {
 				redirect = true
+				io.Copy(ioutil.Discard, part)
+			} else if part.FormName() == "mkdir" {
+				redirect = true
+				dirname, _ := ioutil.ReadAll(part)
+				dstname := path.Join(photo.root, r.URL.Path, string(dirname))
+				if err := os.Mkdir(dstname, 0755); err != nil {
+					panic(err)
+				}
+				return
 			}
-			io.Copy(ioutil.Discard, part)
+
 		} else {
 			dstname := path.Join(photo.root, r.URL.Path, filename)
 			dst, err := os.Create(dstname)
@@ -125,6 +134,7 @@ func (photo *Gallery) Post(w http.ResponseWriter, r *http.Request) {
 			} else if funcNum != "" {
 				fmt.Fprintf(w, `<script type="text/javascript">window.parent.CKEDITOR.tools.callFunction("%s", "/photo/%s", "");</script>`, funcNum, filename)
 			}
+			return
 		}
 	}
 }
