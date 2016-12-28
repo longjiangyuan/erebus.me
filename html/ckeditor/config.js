@@ -8,7 +8,7 @@ CKEDITOR.editorConfig = function( config ) {
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';
   config.contentsCss = "/css/darkstrap.css";
-  config.imageUploadUrl = '/photo/';
-  config.filebrowserImageBrowseUrl = '/photo/';
-  config.filebrowserImageUploadUrl = '/photo/?';
+  config.imageUploadUrl = '/gallery/';
+  config.filebrowserImageBrowseUrl = '/gallery/';
+  config.filebrowserImageUploadUrl = '/gallery/?';
 };
