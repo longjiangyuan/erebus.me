@@ -20,20 +20,20 @@
       <div id="comment{{.ID}}">
         <p>
         <div class="row">
-          <div class="col-xs-3">
+          <div class="col-xs-4">
             <strong>
               {{if .URL}}<a href="{{.URL}}" target="_blank"><span class="glyphicon glyphicon-user"></span> {{.Name}}</a>
               {{else}}<span class="glyphicon glyphicon-user"></span> {{.Name}}
               {{end}}
             </strong>
           </div>
-          <div class="col-xs-3">
+          <div class="col-xs-4">
             <small>
               <span class="glyphicon glyphicon-calendar"></span>
               {{.Time.Format "Jan _2, 2006"}}
             </small>
           </div>
-          <div class="col-xs-3">
+          <div class="col-xs-4">
             <a href="#response" onclick="replyTo({{.ID}})">
               <span class="glyphicon glyphicon-pencil"></span>
               reply
