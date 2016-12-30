@@ -5,17 +5,17 @@
     <!--div class="col-xs-3">
       <span class="glyphicon glyphicon-user"></span> {{.Author}}
     </div-->
-    <div class="col-xs-3">
+    <div class="col-xs-4">
       <span class="glyphicon glyphicon-calendar"></span> {{.PostAt.Format "Jan _2, 2006"}}
     </div>
-    <div class="col-xs-3">
+    <div class="col-xs-4">
       {{if .Category}}
       <a href="/category/{{.Category|urlquery}}"><span class="glyphicon glyphicon-folder-close"></span> {{.Category}}</a>
       {{else}}
       <span class="glyphicon glyphicon-folder-close"></span> Uncategorized
       {{end}}
     </div>
-    <div class="col-xs-3">
+    <div class="col-xs-4">
       {{if eq .NumComments 0}}
       <a href="/blog/{{.ID}}#response"><span class="glyphicon glyphicon-comment"></span> 0 Comments</a>
       {{else}}
