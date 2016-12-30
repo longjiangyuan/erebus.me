@@ -1,8 +1,17 @@
+{{if .}}
 {{range .}}
-{{template "/blog/title.html" .}}
-<div class="article-body">
-  {{if .Thumbnail}}<a href="/blog/{{.ID}}"><img src="{{.Thumbnail}}"/></a>{{end}}
-  <p>{{.Abstract}}</p>
-  <p class="text-right"><a href="/blog/{{.ID}}">Continue reading</a></p>
+    {{template "/blog/title.html" .}}
+    <div class="article-body">
+      {{if .Thumbnail}}<a href="/blog/{{.ID}}"><img src="{{.Thumbnail}}"/></a>{{end}}
+      <p>{{.Abstract}}</p>
+      <p class="text-right"><a href="/blog/{{.ID}}">Continue reading</a></p>
+      <hr>
+    </div>
+{{end}}
+{{else}}
+<div class="panel">
+  <div class="panel-body text-center">
+    <h3>No more articles</h3>
+  </div>
 </div>
 {{end}}

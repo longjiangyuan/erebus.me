@@ -1,4 +1,6 @@
-<div class="col-sm-9">
+<div class="col-sm-8">
+<div class="panel panel-default">
+<div class="panel-body">
   <!-- title -->
   {{template "/blog/title.html" .Article}}
   <!--content-->
@@ -87,16 +89,29 @@
     </form>
   </div>
 </div>
-<div class="col-sm-3">
-  <div class="page-header">
-    <h4>Related Articles</h4>
+</div>
+</div>
+
+<div class="col-sm-4">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h4>Related Articles</h4>
+      <hr>
+      <ul>
+        {{range .Related}}
+        <li><a href="/blog/{{.ID}}" data-pjax>{{.Title}}</a></li>
+        {{end}}
+      </ul>
+    </div>
   </div>
-  <ul>
-    {{range .Related}}
-    <li><a href="/blog/{{.ID}}" data-pjax>{{.Title}}</a></li>
-    {{end}}
-  </ul>
-  {{template "/common/license.html"}}
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h4>License</h4>
+      <hr>
+      <p><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0"   src="/img/cc_80x15.png" /></a></p>
+      <p>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.</a></p>
+    </div>
+  </div>
 </div>
 <script>
 $('pre code').each(function(i, block) {

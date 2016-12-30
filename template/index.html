@@ -1,51 +1,65 @@
 <!-- left page -->
-<div class="col-sm-3 col-xs-0">
-  {{template "/common/about.html"}}
-  {{template "/common/friends.html"}}
-  <!--
-  <div class="row">
-  <div class="col-xs-6"><a class="thumbnail" href="/category/"><img class="img-responsive" src="/photo/DSC_0239-2.jpg"></a></div>
-  <div class="col-xs-6"><a class="thumbnail"><img class="img-responsive" src="/photo/DSC_2063.jpg"></a></div>
-  <div class="col-xs-6"><a class="thumbnail"><img class="img-responsive" src="/photo/DSC_1995.jpg"></a></div>
-  <div class="col-xs-6"><a class="thumbnail"><img class="img-responsive" src="/photo/DSC_1862.jpg"></a></div>
-</div>
--->
-</div>
-
 <!-- middle page -->
-<div class="col-sm-6">
-  {{template "/blog/list.html" .Articles}}
-  <nav>
-    <ul class="pager">
-      {{if gt .Page 0}}<li class="previous" disabled><a href="?page={{.PrevPage}}">&larr; Newer</a></li>{{end}}
-      <li class="next"><a href="?page={{.NextPage}}">Older &rarr;</a></li>
-    </ul>
-  </nav>
+<div class="col-sm-8">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      {{template "/blog/list.html" .Articles}}
+      <nav>
+        <ul class="pager">
+          {{if gt .Page 0}}<li class="previous" disabled><a href="?page={{.PrevPage}}">&larr; Newer</a></li>{{end}}
+          <li class="next"><a href="?page={{.NextPage}}">Older &rarr;</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
 </div>
 
 <!-- right page -->
-<div class="col-sm-3" id="content-right">
-  <div class="page-header">
-    <h4>Recent Comments</h4>
-  </div>
-  <div>
-    <ul>
-      {{range .Comments}}
-      <li><strong>{{.Name}}:</strong> <small>{{.Content}}</small> <a href="/blog/{{.ArticleID}}#comment{{.ID}}" data-pjax>read more</a></li>
-      {{end}}
-    </ul>
+<div class="col-sm-4" id="content-right">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h4>Recent Comments</h4>
+      <hr>
+
+      <ul>
+        {{range .Comments}}
+        <li><strong>{{.Name}}:</strong> <small>{{.Content}}</small> <a href="/blog/{{.ArticleID}}#comment{{.ID}}" data-pjax>read more</a></li>
+        {{end}}
+      </ul>
+    </div>
   </div>
 
-  {{template "/common/category.html" .Category}}
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h4>Categories</h4>
+      <hr>
+      <ul>
+        {{range .Category}}<li><a href="/category/{{.|urlquery}}">{{.}}</a> <!--span class="badge">42</span--></li>{{end}}
+      </ul>
 
-  <div class="page-header">
-    <h4>Albums</h4>
+    </div>
   </div>
-  <div>
-    <ul>
-      <li><a href="/gallery/2016/" data-pjax>2016</a></li>
-      <li><a href="/gallery/cars/" data-pjax>Car Collection</a></li>
-    </ul>
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h4>Albums</h4>
+      <hr>
+      <ul>
+        <li><a href="/gallery/2016/" data-pjax>2016</a></li>
+        <li><a href="/gallery/cars/" data-pjax>Car Collection</a></li>
+      </ul>
+    </div>
   </div>
-  {{template "/common/license.html"}}
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h4>Friends</h4>
+      <hr>
+      <ul>
+        <li><a href="https://blog.shenlifeng.com" target="_blank">LiFeng</a></li>
+        <li><a href="http://imkerwin.com" target="_blank">Kerwin</a></li>
+        <li><a href="http://www.kuangpeng.org" target="_blank">Peng</a></li>
+      </ul>
+    </div>
+  </div>
 </div>
