@@ -1,6 +1,9 @@
 .navbar {
   border-radius: 0;
 }
+.container {
+  max-width: 990px;
+}
 .article-head {
   padding-top: 30px;
 }
@@ -16,6 +19,13 @@
   padding: 0px 0px 10px 0px;
 }
 
+.article-subtitle {
+  color: #777;
+}
+.article-subtitle a {
+  color: #777;
+  hover: #777;
+}
 /*
 body {
   padding-top: 50px;

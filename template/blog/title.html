@@ -1,7 +1,7 @@
-<div>
+<div class="article-title">
   <h3><a href="/blog/{{.ID}}" data-pjax>{{.Title}}</a></h3>
   <!--hr style="margin-bottom: 5px;"-->
-  <div class="row">
+  <div class="row article-subtitle">
     <!--div class="col-xs-3">
       <span class="glyphicon glyphicon-user"></span> {{.Author}}
     </div-->
@@ -10,7 +10,9 @@
     </div>
     <div class="col-xs-4">
       {{if .Category}}
-      <a href="/category/{{.Category|urlquery}}"><span class="glyphicon glyphicon-folder-close"></span> {{.Category}}</a>
+      <a href="/category/{{.Category|urlquery}}">
+        <span class="glyphicon glyphicon-folder-close"></span> {{.Category}}
+      </a>
       {{else}}
       <span class="glyphicon glyphicon-folder-close"></span> Uncategorized
       {{end}}
@@ -18,6 +20,8 @@
     <div class="col-xs-4">
       {{if eq .NumComments 0}}
       <a href="/blog/{{.ID}}#response"><span class="glyphicon glyphicon-comment"></span> 0 Comments</a>
+      {{else if eq .NumComments 1}}
+      <a href="/blog/{{.ID}}#comment"><span class="glyphicon glyphicon-comment"></span> 1 Comment</a>
       {{else}}
       <a href="/blog/{{.ID}}#comment"><span class="glyphicon glyphicon-comment"></span> {{.NumComments}} Comments</a>
       {{end}}
