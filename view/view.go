@@ -18,7 +18,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	args := url.Values{
 		"callback": {r.RequestURI},
 	}
-	http.Redirect(w, r, "/signin?"+args.Encode(), http.StatusFound)
+	http.Redirect(w, r, "/login?"+args.Encode(), http.StatusFound)
 }
 
 func NotFound(w http.ResponseWriter, r *http.Request) {

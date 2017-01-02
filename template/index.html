@@ -6,8 +6,8 @@
       {{template "/blog/list.html" .Articles}}
       <nav>
         <ul class="pager">
-          {{if gt .Page 0}}<li class="previous" disabled><a href="?page={{.PrevPage}}">&larr; Newer</a></li>{{end}}
-          <li class="next"><a href="?page={{.NextPage}}">Older &rarr;</a></li>
+          {{if gt .Page 0}}<li class="previous" disabled><a href="?page={{.PrevPage}}" data-pjax>&larr; Newer</a></li>{{end}}
+          <li class="next"><a href="?page={{.NextPage}}" data-pjax>Older &rarr;</a></li>
         </ul>
       </nav>
     </div>
@@ -34,7 +34,7 @@
       <h4>Categories</h4>
       <hr>
       <ul>
-        {{range .Category}}<li><a href="/category/{{.|urlquery}}">{{.}}</a> <!--span class="badge">42</span--></li>{{end}}
+        {{range .Category}}<li><a href="/category/{{.|urlquery}}" data-pjax>{{.}}</a> <!--span class="badge">42</span--></li>{{end}}
       </ul>
 
     </div>

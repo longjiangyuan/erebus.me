@@ -1,4 +1,4 @@
-{{if .CKEditorFuncNum}}
+{{if .Login}}
 <script>
 function toggleUploadDialog() {
   $('#upload-dialog').modal('toggle');
@@ -48,53 +48,59 @@ function toggleNewFolderDialog() {
 {{end}}
 <!-- left -->
 <div class="col-sm-4">
-  <div class="page-header">
-    <h4>Folders</h4>
-  </div>
-  <div>
-    <ul class="nav nav-pills nav-stacked" role="tablist">
-      {{if .CKEditorFuncNum}}
-      <li role="presentation">
-        <a href="javascript:void(0)" onclick="toggleNewFolderDialog()">
-          <span class="glyphicon glyphicon-plus-sign"></span> NewFolder
-        </a>
-      </li>
-      <li role="presentation">
-        <a href="javascript:void(0)" onclick="toggleUploadDialog()">
-          <span class="glyphicon glyphicon-upload"></span> Upload
-        </a>
-      </li>
-      {{end}}
-      {{if ne $.Root "/"}}
-      <li role="presentation">
-        <a href="..{{if $.CKEditorFuncNum}}?CKEditorFuncNum={{$.CKEditorFuncNum}}{{end}}">
-          <span class="glyphicon glyphicon-folder-close"></span> ..
-        </a>
-      </li>
-      {{end}}
-      {{range .Dirs}}
-      <li role="presentation">
-        <a href="{{.}}/{{if $.CKEditorFuncNum}}?CKEditorFuncNum={{$.CKEditorFuncNum}}{{end}}">
-          <span class="glyphicon glyphicon-folder-close"></span> {{.}}
-        </a>
-      </li>
-      {{end}}
-    </ul>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h4>Folders</h4>
+      <hr>
+      <ul class="nav nav-pills nav-stacked" role="tablist">
+        {{if .Login}}
+        <li role="presentation">
+          <a href="javascript:void(0)" onclick="toggleNewFolderDialog()">
+            <span class="glyphicon glyphicon-plus-sign"></span> NewFolder
+          </a>
+        </li>
+        <li role="presentation">
+          <a href="javascript:void(0)" onclick="toggleUploadDialog()">
+            <span class="glyphicon glyphicon-upload"></span> Upload
+          </a>
+        </li>
+        {{end}}
+
+        {{if ne $.Root "/"}}
+        <li role="presentation">
+          <a href="..{{if $.CKEditorFuncNum}}?CKEditorFuncNum={{$.CKEditorFuncNum}}{{end}}" data-pjax>
+            <span class="glyphicon glyphicon-folder-close"></span> ..
+          </a>
+        </li>
+        {{end}}
+        {{range .Dirs}}
+        <li role="presentation">
+          <a href="{{.}}/{{if $.CKEditorFuncNum}}?CKEditorFuncNum={{$.CKEditorFuncNum}}{{end}}" data-pjax>
+            <span class="glyphicon glyphicon-folder-close"></span> {{.}}
+          </a>
+        </li>
+        {{end}}
+      </ul>
+    </div>
   </div>
 </div>
+
 <!-- right -->
 <div class="col-sm-8">
-  <div class="page-header">
-    <h4>Photos</h4>
-  </div>
-  <div class="row">
-    {{range .Files}}
-    <div class="col-xs-3">
-      <a href="{{if $.CKEditorFuncNum}}javascript:void(0){{else}}/gallery/{{$.Root}}{{.}}{{end}}" class="thumbnail">
-        <img src="/photo/{{$.Root}}{{.}}">
-      </a>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h4>Photos</h4>
+      <hr>
+      <div class="row">
+        {{range .Files}}
+        <div class="col-xs-3">
+          <a href="{{if $.CKEditorFuncNum}}javascript:void(0){{else}}/gallery/{{$.Root}}{{.}}{{end}}" class="thumbnail">
+            <img src="/photo/{{$.Root}}{{.}}">
+          </a>
+        </div>
+        {{end}}
+      </div>
     </div>
-    {{end}}
   </div>
 </div>
 {{if .CKEditorFuncNum}}

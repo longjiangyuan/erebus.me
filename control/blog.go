@@ -43,7 +43,7 @@ func (blog *Blog) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		if _, ok := q["edit"]; ok {
 			blog.Edit(article, w, r)
 		} else if r.URL.Path == "" {
-			//blog.Index(w, r)
+			Home(w, r)
 		} else {
 			blog.Get(article, w, r)
 		}

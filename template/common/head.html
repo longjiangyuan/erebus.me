@@ -29,26 +29,28 @@ $(document).ready(function() {
       }
     });
   }
-  /*
+
   function onprogress(e) {
     var percent = parseInt(100 * e.loaded / e.total);
     progressBar[0].style.width = percent + '%';
   }
 
   $('#container').bind('pjax:start', function() {
+    console.log('pjax start');
     progress[0].style.opacity = 1;
     progressBar[0].style.width = '0%';
   }).bind('pjax:end', function() {
     setTimeout(function() {
+      console.log('pjax end');
       progress[0].style.opacity = 0;
     }, 500);
     activeFolder();
   });
-  */
+
   $('#container').bind('pjax:end', function() {
     activeFolder();
   });
-  $(document).pjax('a', '#container', {xhrFields: {onprogress: onprogress}});
+  $(document).pjax('a[data-pjax]', '#container', {xhrFields: {onprogress: onprogress}});
   activeFolder();
 });
 </script>

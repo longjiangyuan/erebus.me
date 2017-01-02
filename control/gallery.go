@@ -255,12 +255,14 @@ func (photo *Gallery) Index(dir *os.File, w http.ResponseWriter, r *http.Request
 
 	var data struct {
 		CKEditorFuncNum string
+		Login           *model.User
 		Root            string
 		Files           []string
 		Dirs            []string
 		Paths           []PathInfo
 	}
 
+	data.Login = model.GetLogin(r)
 	data.Paths = splitPath(r.URL.Path)
 	data.Root = r.URL.Path
 	data.CKEditorFuncNum = r.FormValue("CKEditorFuncNum")
